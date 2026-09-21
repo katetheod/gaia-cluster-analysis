@@ -62,12 +62,6 @@ The file is not committed to this repository because of its size (~840 MB).
 It can be downloaded from
 [Google Drive](https://drive.google.com/file/d/1YXb91oXz8KUJpgZilIxznwHMRBtfZj4y/view?usp=sharing).
 
-After downloading, place it at:
-
-    data/gaiadr3_cluster_stars.fits
-
-> Google Drive may show a virus-scan warning for files this large.
-> Click **Download anyway** to proceed.
 
 ---
 
@@ -127,10 +121,5 @@ cd gaia-cluster-analysis
 pip install -r requirements.txt
 ```
 
-## Data
 
-The analysis expects `gaiadr3_cluster_stars.fits` in this directory.
 
-This file is not committed to the repository because of its size
-(~840 MB). The data can be downloaded from
-[Google Drive](https://drive.google.com/file/d/1YXb91oXz8KUJpgZilIxznwHMRBtfZj4y/view?usp=sharing).
