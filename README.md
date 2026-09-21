@@ -26,4 +26,5 @@ jupyter notebook notebooks/gaia_cluster_analysis.ipynb
 The analysis expects `gaiadr3_cluster_stars.fits` in this directory.
 
 This file is not committed to the repository because of its size
-(~840 MB). 
+(~840 MB). The data can be downloaded from
+[Google Drive](https://drive.google.com/file/d/1YXb91oXz8KUJpgZilIxznwHMRBtfZj4y/view?usp=sharing).
