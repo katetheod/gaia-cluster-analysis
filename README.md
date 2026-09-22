@@ -189,5 +189,4 @@ Several aspects of the analysis are exploratory.
 - The King model is an empirical description of the projected density profile and does not by itself establish the physical origin of the measured structure.
 - The uncertainty estimates depend on the assumptions of the fitting and bootstrap procedures.
 
-The results should therefore be interpreted as an exploratory investigation and a foundation for more detailed cluster-structure analysis.
 ---
