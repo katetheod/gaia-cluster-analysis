@@ -46,9 +46,6 @@ The main dataset is:
 
 It is a FITS binary table containing approximately **1.29 million Gaia DR3 sources** with cluster membership information and 56 catalogue columns.
 
-The dataset is **not included in this repository because of its size (~840 MB)**.
-
-
 The file is not committed to this repository because of its size (~840 MB). It can be downloaded from [Google Drive](https://drive.google.com/file/d/1YXb91oXz8KUJpgZilIxznwHMRBtfZj4y/view?usp=sharing).
 
 ### Main parameters
