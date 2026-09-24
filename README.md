@@ -1,13 +1,14 @@
 # Gaia DR3 Stellar Cluster Analysis
 
-An exploratory analysis of the **astrometric, spatial, and statistical properties of Galactic stellar clusters** using data from the **Gaia Data Release 3 (Gaia DR3)**.
+An exploratory **data analysis and statistical modelling project** using Gaia DR3 to investigate the astrometric, spatial, and statistical properties of Galactic stellar clusters.
 
-The project combines catalogue-level exploratory data analysis with statistical modelling to investigate cluster membership, spatial structure, stellar-population differences, and correlations between global cluster properties.
+The project combines **large-catalogue data exploration, data cleaning and filtering, statistical hypothesis testing, correlation analysis, uncertainty estimation, model fitting, Bayesian inference, and scientific visualization**. Although the application is astrophysical, the workflow demonstrates transferable data-analysis skills for working with large, structured datasets.
 
 ## Contents
 
 - [Project overview](#project-overview)
 - [Data](#data)
+- [Data analysis focus](#data-analysis-focus)
 - [Notebooks](#notebooks)
 - [Analysis](#analysis)
 - [Key findings](#key-findings)
@@ -26,15 +27,13 @@ The project combines catalogue-level exploratory data analysis with statistical 
 
 A central challenge is distinguishing genuine cluster members from foreground and background stars along the same line of sight. The catalogue used in this project includes a **membership probability (`Prob`)** for each source, which is used to separate higher- and lower-confidence members.
 
-This repository contains two complementary analyses:
+This repository contains **three complementary analyses**:
 
-1. **Statistical Analysis of Stellar Populations in Gaia DR3 Clusters**  
-   Investigates membership probabilities, spatial variations in stellar properties, cluster-level correlations, and the sensitivity of correlations to statistical methodology.
+1. **Statistical Analysis of Stellar Populations in Gaia DR3 Clusters** — membership, distributions, subgroup comparisons, correlations, and statistical testing.
+2. **Stellar Density Profiles and King Model Fitting** — radial aggregation, model fitting, goodness-of-fit, and uncertainty estimation.
+3. **Bayesian Distance Inference and MCMC Modeling** — prior sensitivity, posterior inference, and MCMC estimation of cluster-model parameters.
 
-2. **Stellar Density Profiles and King Model Fitting**  
-   Constructs a radial stellar-density profile for a cluster, fits a King model, estimates parameter uncertainties, and compares the radial structure of different stellar subpopulations.
-
-Together, the notebooks form a small end-to-end astronomical data-analysis portfolio project, covering data exploration, statistical inference, model fitting, uncertainty estimation, and scientific visualization.
+Together, the notebooks form an end-to-end portfolio project covering **data exploration, preprocessing, statistical inference, model fitting, uncertainty estimation, Bayesian methods, and visualization**.
 
 ---
 
@@ -63,6 +62,47 @@ The file is not committed to this repository because of its size (~840 MB). It c
 
 ---
 
+
+### Data preparation
+
+- Loaded and explored a large FITS catalogue using **Astropy**
+- Selected relevant catalogue columns for downstream analysis
+- Filtered sources using cluster membership probability
+- Created high- and low-confidence samples for comparison
+- Constructed spatial subsets using right ascension and declination
+- Calculated derived quantities such as radial distance from the cluster centre
+
+### Exploratory data analysis
+
+- Examined distributions of parallax, proper motion, magnitude, and colour
+- Compared stellar populations across spatial and membership-probability groups
+- Investigated relationships between cluster-level summary statistics
+- Used transformations and alternative statistical measures to test the robustness of observed relationships
+
+### Statistical analysis
+
+- Applied two-sample statistical tests to compare subsamples
+- Calculated **Pearson and Spearman correlations**
+- Compared raw and logarithmically transformed variables
+- Used chi-square statistics for model fitting and goodness-of-fit assessment
+- Applied **bootstrap resampling** to estimate parameter uncertainties
+
+### Statistical modelling
+
+- Fitted radial stellar-density profiles with a **King model**
+- Estimated model parameters and associated uncertainties
+- Compared radial profiles of different stellar subpopulations
+- Extended the analysis to **Bayesian distance inference**
+- Used different prior assumptions and sample sizes to investigate posterior sensitivity
+- Used **MCMC** to estimate posterior distributions for King-model parameters
+
+### Visualization and interpretation
+
+The notebooks use visualizations to support the analysis, including distributions, astrometric comparisons, spatial maps, radial density profiles, correlation plots, model fits, residuals, MCMC diagnostics, and posterior distributions.
+
+
+---
+
 ## Notebooks
 
 ### 1. Statistical Analysis of Stellar Populations in Gaia DR3 Clusters
@@ -81,6 +121,8 @@ The analysis includes:
 - exploration of correlations between global cluster properties;
 - comparison of Pearson and Spearman correlation coefficients;
 - investigation of the effect of logarithmic transformations.
+
+**Data-analysis skills:** exploratory data analysis, filtering, feature selection, statistical testing, correlation analysis, subgroup comparison, and visualization.
 
 ---
 
@@ -101,28 +143,56 @@ The analysis includes:
 - bootstrap resampling for additional uncertainty estimates;
 - comparison of density profiles for different stellar subpopulations.
 
-The notebook uses a King-profile model to describe the projected radial density distribution and evaluates the quality and robustness of the resulting fit.
+**Data-analysis skills:** feature engineering, aggregation/binning, nonlinear model fitting, goodness-of-fit analysis, bootstrap uncertainty estimation, and model evaluation.
 
+---
+
+### 3. Bayesian Distance Inference and MCMC Modeling
+
+[`notebooks/gaia_cluster_bayesian_inference_mcmc.ipynb`](notebooks/gaia_cluster_bayesian_inference_mcmc.ipynb)
+
+This notebook extends the project from classical statistical analysis to Bayesian inference.
+
+The analysis includes:
+
+- Bayesian distance inference from Gaia parallaxes;
+- comparison of a uniform prior with an exponentially decreasing distance prior;
+- investigation of prior sensitivity using both the full sample and a smaller 10-star sample;
+- estimation of posterior modes and credible intervals;
+- King-profile modelling using a chi-square likelihood;
+- MCMC parameter estimation using `emcee`;
+- posterior and trace analysis;
+- power-spectrum diagnostics;
+- visualization of posterior distributions using `corner`.
+
+Representative results include:
+
+- full-sample posterior mode of approximately **1.558 kpc** under the uniform-prior analysis;
+- 10-star sample posterior mode of approximately **1.498 kpc** under the exponentially decreasing prior;
+- King-model minimum chi-square of approximately **15.22 for 23 degrees of freedom**, corresponding to a goodness-of-fit of approximately **0.887**;
+- noticeable parameter correlations in the MCMC posterior, including a relationship between tidal radius and cluster mass.
+
+**Data-analysis skills:** probabilistic modelling, prior sensitivity analysis, posterior inference, MCMC, uncertainty quantification, diagnostic analysis, and interpretation of parameter correlations.
+
+---
 
 ## Key findings
 
 - **Membership probability separates distinct astrometric populations.** High-probability members are generally more concentrated in astrometric parameter space than lower-probability candidates.
-
-- **Parallax is comparatively homogeneous within the analysed clusters**, while several spatial subsamples show differences in proper motion and colour. These differences may reflect a combination of intrinsic cluster structure, stellar populations, observational effects, or reddening.
-
-- **Cluster-level properties show measurable relationships.** In particular, mean parallax and angular size exhibit a relationship consistent with the geometric effect that nearby clusters can appear larger on the sky.
-
-- **Correlation results depend on the statistical treatment.** Comparing Pearson and Spearman coefficients, as well as raw and logarithmically transformed quantities, demonstrates the importance of checking the robustness of correlations rather than relying on a single statistic.
-
+- **Parallax is comparatively homogeneous within the analysed clusters**, while several spatial subsamples show differences in proper motion and colour.
+- **Cluster-level properties show measurable relationships**, including a relationship between mean parallax and angular size.
+- **Correlation results depend on the statistical treatment.** Pearson vs. Spearman coefficients and raw vs. logarithmically transformed quantities can give different perspectives.
 - **The King model provides a good description of the analysed radial density profile**, with the reported fit giving a reduced chi-square below unity and a high goodness-of-fit probability.
-
 - **Bootstrap and chi-square analyses provide complementary uncertainty estimates** for the fitted King-model parameters.
-
-- **Subpopulation comparisons provide evidence that some stellar properties vary across the cluster field**, particularly proper motion and colour in selected samples. These results are exploratory and require further investigation to establish their physical origin.
+- **Bayesian distance estimates are sensitive to prior assumptions and sample size**, illustrating an important consideration when drawing inferences from noisy astrometric measurements.
+- **The MCMC analysis reveals posterior parameter correlations** and provides a probabilistic description of uncertainty in the fitted cluster model.
+- **Subpopulation comparisons provide evidence that some stellar properties vary across the cluster field**, particularly proper motion and colour in selected samples. These results are exploratory.
 
 ---
 
 ## Technologies
+
+### Python ecosystem
 
 - **Python**
 - **NumPy**
@@ -131,20 +201,9 @@ The notebook uses a King-profile model to describe the projected radial density 
 - **Astropy**
 - **Matplotlib**
 - **lmfit**
+- **emcee**
+- **corner**
 - **Jupyter Notebook**
-- **FITS astronomical data**
-
-### Methods
-
-- Exploratory data analysis
-- Data filtering and preprocessing
-- Statistical hypothesis testing
-- Pearson and Spearman correlation analysis
-- Radial binning
-- Least-squares / chi-square model fitting
-- Bootstrap resampling
-- Uncertainty estimation
-- Scientific visualization
 
 ---
 
@@ -162,28 +221,5 @@ Install the required Python packages:
 ```bash
 pip install -r requirements.txt
 ```
-
-Place the downloaded Gaia DR3 FITS dataset in the location expected by the notebooks.
-
-Launch Jupyter:
-
-```bash
-jupyter notebook
-```
-
 ---
 
-## Caveats and limitations
-
-Several aspects of the analysis are exploratory.
-
-- Membership probability is used as supplied by the cluster catalogue and is not independently recalculated.
-- The spatial subsamples are defined relative to the mean RA and Dec, which is a simple division and does not necessarily correspond to physically distinct regions.
-- The t-tests rely on assumptions that may not be fully satisfied by all Gaia observables.
-- Multiple statistical comparisons are performed without a multiple-testing correction.
-- The number of clusters used in the cluster-level correlation analysis is limited, so correlation coefficients may be sensitive to individual objects.
-- Pearson and Spearman correlations describe statistical association and do not establish causation.
-- The King model is an empirical description of the projected density profile and does not by itself establish the physical origin of the measured structure.
-- The uncertainty estimates depend on the assumptions of the fitting and bootstrap procedures.
-
----
